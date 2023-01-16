@@ -9,7 +9,7 @@ import { CartContext } from "../../contexts/cart.context";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
 function Checkout() {
-  const { cartItems, setIsCartOpen, total } = useContext(CartContext);
+  const { cartItems, setIsCartOpen, cartTotal } = useContext(CartContext);
 
   useEffect(() => {
     setIsCartOpen(false);
@@ -38,7 +38,7 @@ function Checkout() {
       {cartItems.map((item) => {
         return <CheckoutItem key={item.id} item={item} />;
       })}
-      <Total>Total: {total}</Total>
+      <Total>Total: {cartTotal}</Total>
     </CheckoutContainer>
   );
 }

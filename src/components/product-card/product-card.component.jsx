@@ -14,7 +14,7 @@ function ProductCard({ product }) {
   const { addItemToCart } = useContext(CartContext);
 
   const handleClick = () => {
-    addItemToCart({ ...product });
+    addItemToCart(product);
   };
 
   return (
