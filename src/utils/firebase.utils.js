@@ -31,6 +31,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+// eslint-disable-next-line
 const fireBaseApp = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
@@ -58,13 +59,8 @@ export const addCollectionAndDocument = async (collectionKey, objectToAdd) => {
 export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, "categories");
   const q = query(collectionRef);
-  const querrySnapShot = await getDocs(q);
-  const categoryMap = querrySnapShot.docs.reduce((accumulator, docSnapShot) => {
-    const { title, items } = docSnapShot.data();
-    accumulator[title.toLowerCase()] = items;
-    return accumulator;
-  }, {});
-  return categoryMap;
+  const querrySnapShots = await getDocs(q);
+  return querrySnapShots.docs.map((doc) => doc.data());
 };
 
 export const createUserDocumentFromAuth = async (
