@@ -1,4 +1,9 @@
-import { BaseButton, GoogleButton, InvertedButton } from "./button.styles.js";
+import {
+  BaseButton,
+  GoogleButton,
+  InvertedButton,
+  LoadingButton,
+} from "./button.styles.js";
 
 export const BUTTON_TYPES = {
   base: "base",
@@ -14,9 +19,13 @@ const getButton = (buttonType = BUTTON_TYPES.base) => {
   }[buttonType];
 };
 
-function Button({ children, buttonType, ...otherProps }) {
+function Button({ children, buttonType, isLoading, ...otherProps }) {
   const CustomButton = getButton(buttonType);
-  return <CustomButton {...otherProps}>{children}</CustomButton>;
+  return (
+    <CustomButton disabled={isLoading} {...otherProps}>
+      {isLoading ? <LoadingButton /> : children}
+    </CustomButton>
+  );
 }
 
 export default Button;
